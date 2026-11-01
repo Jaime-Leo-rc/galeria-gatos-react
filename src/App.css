@@ -1,0 +1,28 @@
+.item {
+ display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.container{
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.tarjeta{
+
+  border-radius: 8px;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  background-color: rgb(75, 117, 103);
+  height: 250px;
+}
+
+.boton-like{
+
+justify-content: end;
+align-content: end;  
+}
