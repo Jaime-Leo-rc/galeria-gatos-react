@@ -1,13 +1,13 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 
-function Tarjeta({ titulo }) {
+function Tarjeta({ imagen }) {
   return (
     <div className="item">
       <div className="tarjeta">
-        <p>{titulo}</p>
+        <img src={imagen} alt="gato" />
       </div>
       <div className="boton-like">
         <Contador />
@@ -17,13 +17,26 @@ function Tarjeta({ titulo }) {
 }
 
 function App() {
-  return (
-    <div className="container">
-      <Tarjeta titulo="Foto1" />
-      <Tarjeta titulo="Foto2" />
-      <Tarjeta titulo="Foto3" />
-    </div>
 
+   const [gatos, setGatos] = useState([]);
+
+  useEffect(() => {
+    async function cargarGatos() {
+      const respuesta = await fetch("https://api.thecatapi.com/v1/images/search?limit=6");
+      const datos = await respuesta.json();
+      console.log(datos);
+      setGatos(datos);
+    }
+    cargarGatos();
+  }, []);
+
+  return (
+
+    <div className="container">
+
+      {gatos.map(gato => (
+        <Tarjeta key={gato.id} imagen={gato.url} />))}
+    </div>
 );
   
 }
