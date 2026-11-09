@@ -20,23 +20,32 @@ function App() {
 
    const [gatos, setGatos] = useState([]);
    const [cargando, setCargando] = useState(true);
-  
-    async function cargarGatos() {
-      const respuesta = await fetch("https://api.thecatapi.com/v1/images/search?limit=6");
-      const datos = await respuesta.json();
-      console.log(datos);
-      setGatos(datos);
-      setCargando(false);
-    }
+   const [error, setError] = useState(null);
 
-     useEffect(() => {
+    async function cargarGatos() {
+      try {
+    const respuesta = await fetch("https://api.thecatapi.com/v1/images/search?limit=6");
+    if (!respuesta.ok) {
+      throw new Error("Error " + respuesta.status);
+    }
+    const datos = await respuesta.json();
+    setGatos(datos);} 
+    catch (e) {
+    setError("No se pudieron cargar los gatos");} 
+    finally {
+    setCargando(false);
+  }}
+
+  useEffect(() => {
     cargarGatos();
-  }, []);
+    }, []);
 
   if (cargando) {
   return <p>Cargando...</p>;
   }
-
+  if (error) {
+  return <p>{error}</p>;
+  }
   return (
 
     <div className="container">
@@ -57,9 +66,5 @@ function Contador() {
 
   );
 }
-
-
-
-
 
 export default App
