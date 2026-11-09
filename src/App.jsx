@@ -20,15 +20,21 @@ function App() {
 
    const [gatos, setGatos] = useState([]);
 
-  useEffect(() => {
+  
     async function cargarGatos() {
       const respuesta = await fetch("https://api.thecatapi.com/v1/images/search?limit=6");
       const datos = await respuesta.json();
       console.log(datos);
       setGatos(datos);
     }
+
+     useEffect(() => {
     cargarGatos();
   }, []);
+
+
+
+  
 
   return (
 
