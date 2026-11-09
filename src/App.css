@@ -24,12 +24,8 @@
 .boton-like{
 justify-content: end;
 align-content: end;  
-cursor: pointer; color: bisque;
 }
 
-.item button {
-  cursor: pointer;
-}
 
 .tarjeta img {
   width: 100%;

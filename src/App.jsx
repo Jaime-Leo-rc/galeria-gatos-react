@@ -19,22 +19,23 @@ function Tarjeta({ imagen }) {
 function App() {
 
    const [gatos, setGatos] = useState([]);
-
+   const [cargando, setCargando] = useState(true);
   
     async function cargarGatos() {
       const respuesta = await fetch("https://api.thecatapi.com/v1/images/search?limit=6");
       const datos = await respuesta.json();
       console.log(datos);
       setGatos(datos);
+      setCargando(false);
     }
 
      useEffect(() => {
     cargarGatos();
   }, []);
 
-
-
-  
+  if (cargando) {
+  return <p>Cargando...</p>;
+  }
 
   return (
 
