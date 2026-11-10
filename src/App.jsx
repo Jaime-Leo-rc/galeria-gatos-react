@@ -29,7 +29,7 @@ function App() {
       throw new Error("Error " + respuesta.status);
     }
     const datos = await respuesta.json();
-    setGatos(datos);} 
+    setGatos([...gatos, ...datos]);} 
     catch (e) {
     setError("No se pudieron cargar los gatos");} 
     finally {
@@ -49,9 +49,9 @@ function App() {
   return (
 
     <div className="container">
-
       {gatos.map(gato => (
         <Tarjeta key={gato.id} imagen={gato.url} />))}
+        <div><button onClick={cargarGatos}>Cargar más gatos</button></div>
     </div>
 );
   
